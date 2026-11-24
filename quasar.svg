@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Quasar at cosmic dawn</title><desc id="desc">A bright central quasar surrounded by a glowing disk and distant stars.</desc>
+  <defs>
+    <radialGradient id="space"><stop stop-color="#392858"/><stop offset=".55" stop-color="#171b3a"/><stop offset="1" stop-color="#090e22"/></radialGradient>
+    <radialGradient id="halo"><stop stop-color="#fff4c8"/><stop offset=".08" stop-color="#ffcf9c"/><stop offset=".22" stop-color="#e477a2" stop-opacity=".9"/><stop offset=".48" stop-color="#9b58bc" stop-opacity=".48"/><stop offset="1" stop-color="#7547c0" stop-opacity="0"/></radialGradient>
+    <linearGradient id="disk"><stop stop-color="#f8c38a" stop-opacity="0"/><stop offset=".42" stop-color="#f7b6cb"/><stop offset=".5" stop-color="#fff2d8"/><stop offset=".58" stop-color="#c87de0"/><stop offset="1" stop-color="#9c5bc8" stop-opacity="0"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1200" height="560" fill="url(#space)"/>
+  <g fill="#fff"><circle cx="112" cy="88" r="2"/><circle cx="216" cy="412" r="2"/><circle cx="332" cy="153" r="1.5"/><circle cx="876" cy="92" r="2"/><circle cx="1030" cy="190" r="1.5"/><circle cx="1087" cy="444" r="2"/><circle cx="954" cy="390" r="1.5"/><circle cx="719" cy="84" r="1.5"/><circle cx="83" cy="287" r="1.5"/><circle cx="438" cy="469" r="1.5"/></g>
+  <ellipse cx="812" cy="290" rx="337" ry="221" fill="url(#halo)" opacity=".85"/>
+  <ellipse cx="812" cy="297" rx="256" ry="51" fill="url(#disk)" transform="rotate(-13 812 297)" filter="url(#blur)" opacity=".9"/>
+  <ellipse cx="812" cy="297" rx="214" ry="24" fill="url(#disk)" transform="rotate(-13 812 297)"/>
+  <circle cx="812" cy="297" r="23" fill="#fff4d4"/><circle cx="812" cy="297" r="8" fill="#fff"/>
+  <path d="M812 270 778 66M812 324l-35 186" stroke="#f8c9ef" stroke-opacity=".45" stroke-width="3"/>
+  <text x="56" y="493" fill="#fff" fill-opacity=".8" font-family="Arial,sans-serif" font-size="18" letter-spacing="3">AN ARTIST’S IMPRESSION · NOT A DIRECT PHOTOGRAPH</text>
+</svg>
