@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#bb1919">
+  <title>My Gazette — Science & Space</title>
+  <style>
+    :root { --red:#bb1919; --ink:#171717; --muted:#646464; --line:#d8d8d8; --paper:#fff; --wash:#f5f5f5; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Arial, Helvetica, sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    a:hover { text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
+    .topline { height:5px; background:var(--red); }
+    .wrap { width:min(1200px, calc(100% - 40px)); margin:auto; }
+    .masthead { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:84px; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:13px; }
+    .logo { display:flex; gap:3px; }
+    .logo span { display:grid; place-items:center; width:35px; height:39px; background:var(--red); color:white; font-weight:800; font-size:25px; letter-spacing:-2px; }
+    .brand-name { font-weight:800; font-size:23px; letter-spacing:-.8px; }
+    .brand-sub { margin-top:4px; color:var(--muted); font-size:12px; }
+    .header-right { display:flex; align-items:center; gap:22px; color:#444; font-size:13px; }
+    .weather { display:flex; align-items:center; gap:7px; }
+    .sun { color:#d49b00; font-size:21px; }
+    .subscribe { background:#222; color:#fff; padding:11px 15px; font-weight:700; }
+    .nav { display:flex; align-items:center; gap:0; overflow:auto; border-bottom:1px solid var(--line); scrollbar-width:none; }
+    .nav a { flex:none; padding:15px 17px; font-size:14px; font-weight:700; border-right:1px solid #eee; }
+    .nav a:first-child { padding-left:0; color:var(--red); }
+    .nav a:last-child { border:0; }
+    .breaking { display:flex; align-items:center; gap:12px; margin:20px 0 25px; padding:11px 14px; background:#f2f2f2; font-size:14px; }
+    .breaking strong { color:var(--red); text-transform:uppercase; font-size:11px; letter-spacing:.7px; white-space:nowrap; }
+    .breaking time { margin-left:auto; color:var(--muted); font-size:12px; white-space:nowrap; }
+    .section-label { display:flex; justify-content:space-between; align-items:center; margin:0 0 15px; border-bottom:2px solid var(--red); }
+    .section-label h2 { margin:0; padding:0 0 9px; font-size:19px; letter-spacing:-.4px; }
+    .section-label span { color:var(--muted); font-size:12px; }
+    .lead-grid { display:grid; grid-template-columns:1.52fr 1fr; gap:24px; }
+    .lead-card { min-width:0; }
+    .hero-art { position:relative; display:flex; align-items:end; min-height:370px; overflow:hidden; padding:28px; color:#fff; background:linear-gradient(180deg,rgba(7,27,41,.02) 20%,rgba(7,27,41,.78) 100%), linear-gradient(120deg,#9ec9ce 0%,#568c97 48%,#244e5d 100%); }
+    .hero-art:before { content:""; position:absolute; inset:0; opacity:.72; background:linear-gradient(152deg,transparent 50%,#d5e2dc 50.2% 55%,transparent 55.2%),linear-gradient(164deg,transparent 43%,#abc8c2 43.2% 53%,transparent 53.2%),linear-gradient(90deg,transparent 10%,rgba(234,229,211,.82) 10% 11%,transparent 11% 25%,rgba(234,229,211,.55) 25% 26%,transparent 26% 70%,rgba(234,229,211,.7) 70% 71%,transparent 71%),linear-gradient(0deg,#203c45 0 18%,transparent 18%); }
+    .hero-art:after { content:""; position:absolute; right:12%; bottom:14%; width:24%; height:45%; background:linear-gradient(90deg,#e5d6b9 0 10%,#445f63 10% 15%,#e4d5b8 15% 24%,#425d62 24% 31%,#e8daba 31% 39%,#425c61 39% 45%,#d8c9ad 45% 100%); clip-path:polygon(15% 0,83% 0,100% 100%,0 100%); box-shadow:0 0 50px #193e48; }
+    .hero-art.space { background:radial-gradient(ellipse at 74% 47%,#f4c778 0 1%,#c85c56 2%,#572d70 9%,transparent 21%),radial-gradient(ellipse at 73% 48%,#f7ddaa 0 2%,#d98c90 4%,#6e458f 9%,transparent 20%),radial-gradient(ellipse at 24% 25%,#fff 0 1px,transparent 2px),radial-gradient(ellipse at 58% 17%,#fff 0 1px,transparent 2px),radial-gradient(ellipse at 15% 69%,#fff 0 1px,transparent 2px),radial-gradient(ellipse at 88% 23%,#fff 0 1px,transparent 2px),radial-gradient(ellipse at 43% 59%,#fff 0 1px,transparent 2px),linear-gradient(120deg,#060d22,#171b43 52%,#261738); }
+    .hero-art.space:before { inset:0; opacity:.5; background:radial-gradient(ellipse at 71% 50%,transparent 13%,rgba(255,191,113,.7) 13.3% 13.7%,transparent 14% 18%,rgba(184,135,210,.5) 18.3% 18.6%,transparent 19%),radial-gradient(ellipse at 70% 48%,#fff 0 1px,transparent 2px),radial-gradient(ellipse at 34% 38%,#fff 0 1px,transparent 2px),radial-gradient(ellipse at 47% 75%,#fff 0 1px,transparent 2px); }
+    .hero-art.space:after { content:""; position:absolute; right:21%; top:27%; width:90px; height:90px; border-radius:50%; background:radial-gradient(circle at 34% 32%,#fff0ca 0 2%,#d98c90 16%,#784e98 40%,#211b4a 72%); box-shadow:0 0 35px #c887d1; }
+    .source-link { display:inline-block; margin-top:14px; color:#fff; border-bottom:1px solid rgba(255,255,255,.65); font-weight:700; font-size:13px; }
+    .hero-copy { position:relative; z-index:1; max-width:660px; }
+    .eyebrow { display:inline-block; margin-bottom:11px; padding:5px 8px; background:var(--red); color:white; text-transform:uppercase; font-size:10px; font-weight:800; letter-spacing:.8px; }
+    .hero-copy h1 { margin:0 0 12px; font-family:Georgia,serif; font-size:clamp(30px,4vw,45px); line-height:1.08; letter-spacing:-1.1px; }
+    .hero-copy p { max-width:570px; margin:0; color:#f1f1f1; font-size:16px; line-height:1.5; }
+    .meta { display:flex; align-items:center; gap:9px; margin-top:17px; color:var(--muted); font-size:12px; }
+    .hero-copy .meta { color:#e0e0e0; }
+    .dot { width:4px; height:4px; border-radius:50%; background:currentColor; }
+    .side-stories { display:grid; gap:16px; align-content:start; }
+    .story { display:grid; grid-template-columns:112px 1fr; gap:14px; padding-bottom:15px; border-bottom:1px solid var(--line); }
+    .story:last-child { border:0; padding-bottom:0; }
+    .thumb { min-height:88px; background:#d7e5e5; position:relative; overflow:hidden; }
+    .thumb:before,.thumb:after { content:""; position:absolute; }
+    .thumb.city { background:radial-gradient(circle at 60% 45%,#d7838d,#513d7b 30%,#111a39 72%); }
+    .thumb.city:before { left:10%; right:8%; bottom:0; height:64%; background:radial-gradient(ellipse at center,#e6c5b3 0 3%,#bb748a 12%,#593b75 45%,transparent 70%); }
+    .thumb.bike { background:radial-gradient(circle at 58% 50%,#f1c983,#8f4e81 18%,#182145 70%); }
+    .thumb.bike:before { width:42px;height:42px;border:2px solid #e6d7f2;border-radius:50%;left:35px;bottom:21px;box-shadow:0 0 18px #c98dd8; }
+    .thumb.bike:after { left:16px;bottom:15px;width:75px;height:2px;background:#c2a9df;transform:rotate(-18deg); }
+    .thumb.book { background:radial-gradient(circle at 32% 34%,#fff1d1 0 1px,transparent 3px),radial-gradient(circle at 73% 61%,#fff 0 1px,transparent 3px),linear-gradient(135deg,#41306c,#101a3c); }
+    .thumb.book:before { width:38px;height:38px;left:37px;bottom:22px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#fff0cf,#d98b9a 35%,#684b92 72%);box-shadow:0 0 15px #bb8bdd; }
+    .story h3 { margin:1px 0 7px; font-family:Georgia,serif; font-size:17px; line-height:1.22; }
+    .story p { margin:0; color:var(--muted); font-size:12px; line-height:1.4; }
+    .story .meta { margin-top:8px; font-size:11px; }
+    .lower { display:grid; grid-template-columns:1fr 300px; gap:32px; margin:38px 0 44px; }
+    .latest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:19px; }
+    .latest-card { padding-right:17px; border-right:1px solid var(--line); }
+    .latest-card:last-child { border:0; padding-right:0; }
+    .mini-art { height:112px; margin-bottom:12px; background:linear-gradient(135deg,#d8e1e0,#8da7a1); position:relative; overflow:hidden; }
+    .mini-art.food { background:linear-gradient(135deg,#f0d9b7,#d59261); }
+    .mini-art.park { background:linear-gradient(135deg,#bbd2b5,#59806c); }
+    .mini-art:after { content:""; position:absolute; inset:30% 0 0; background:linear-gradient(160deg,transparent 25%,rgba(30,70,69,.8) 25.5% 31%,transparent 31.5%),linear-gradient(0deg,rgba(34,70,55,.6),transparent); }
+    .latest-card h3 { margin:0; font-family:Georgia,serif; font-size:18px; line-height:1.2; }
+    .latest-card p { margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.45; }
+    .latest-card .meta { margin-top:11px; }
+    .briefing { align-self:start; background:#f4f4f4; padding:18px; border-top:3px solid #222; }
+    .briefing h2 { margin:0 0 13px; font-size:18px; }
+    .briefing p { margin:0 0 15px; color:#444; font-size:13px; line-height:1.5; }
+    .briefing button { width:100%; padding:11px; border:0; background:#222; color:white; font-weight:700; cursor:pointer; }
+    .briefing button:hover { background:var(--red); }
+    .briefing small { display:block; margin-top:10px; color:var(--muted); line-height:1.4; }
+    footer { background:#222; color:#ddd; padding:25px 0; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; font-size:12px; }
+    .footer-inner strong { color:#fff; font-size:16px; }
+    @media (max-width:850px) { .lead-grid,.lower { grid-template-columns:1fr; } .side-stories { grid-template-columns:repeat(3,1fr); gap:14px; } .story { display:block; padding:0; border:0; } .story .thumb { margin-bottom:10px; } .story h3 { font-size:16px; } .briefing { max-width:none; } }
+    @media (max-width:560px) { .wrap { width:min(100% - 28px,1200px); } .masthead { min-height:72px; } .brand-name { font-size:19px; } .brand-sub { font-size:10px; } .logo span { width:29px;height:33px;font-size:21px; } .header-right .weather { display:none; } .subscribe { padding:9px 10px; font-size:12px; } .nav a { padding:13px 12px; font-size:13px; } .breaking { align-items:flex-start; flex-wrap:wrap; gap:7px; font-size:13px; } .breaking time { margin-left:0; } .hero-art { min-height:345px; padding:20px; } .hero-copy h1 { font-size:31px; } .hero-copy p { font-size:14px; } .side-stories { grid-template-columns:1fr; gap:0; } .story { display:grid; grid-template-columns:100px 1fr; padding:13px 0; border-bottom:1px solid var(--line); } .story .thumb { margin:0; min-height:82px; } .lower { margin-top:30px; } .latest-grid { grid-template-columns:1fr; gap:0; } .latest-card { display:grid; grid-template-columns:100px 1fr; column-gap:13px; padding:14px 0; border:0; border-bottom:1px solid var(--line); } .mini-art { grid-row:span 3; height:82px; margin:0; } .latest-card h3 { font-size:16px; } .latest-card p { display:none; } .latest-card .meta { margin-top:7px; } .footer-inner { align-items:flex-start; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header class="wrap">
+    <div class="masthead">
+      <a class="brand" href="#top" aria-label="My Gazette — home">
+        <span class="logo" aria-hidden="true"><span>M</span><span>G</span></span>
+        <span><span class="brand-name">MY GAZETTE</span><span class="brand-sub">News close to home</span></span>
+      </a>
+      <div class="header-right"><span class="weather"><span class="sun">✦</span> Science&nbsp; • &nbsp;Space</span><a class="subscribe" href="#newsletter">Subscribe</a></div>
+    </div>
+    <nav class="nav" aria-label="News sections">
+      <a href="#top">Home</a><a href="#latest">Ukraine</a><a href="#latest">World</a><a href="#latest">Science</a><a href="#latest">Space</a><a href="#latest">Technology</a><a href="#newsletter">Opinion</a>
+    <a href="article.html">Full story</a></nav>
+  </header>
+  <main class="wrap" id="top">
+    <div class="breaking"><strong>Science</strong><a href="article.html">Euclid telescope helps identify the most distant known quasar</a><time>November 24</time></div>
+    <div class="section-label"><h2>Science & Space</h2><span>Tuesday, November 24, 2026</span></div>
+    <section class="lead-grid" aria-label="Top stories">
+      <article class="lead-card" id="main-story">
+        <div class="hero-art space" aria-label="Illustration of a distant quasar in space">
+          <div class="hero-copy"><span class="eyebrow">Astronomy</span><h1>Astronomers discover the most distant known quasar, seen just 630 million years after the Big Bang</h1><p>Its light traveled about 13.1 billion years to reach us. The black hole at its center has a mass roughly 360 million times the Sun’s.</p><div class="meta"><span>Based on Associated Press reporting</span><span class="dot"></span><time>November 24, 2026</time></div><a class="source-link" href="https://apnews.com/article/7d60ddc27c43517b0968c8294262a6a5" target="_blank" rel="noopener">Read the AP News report ↗</a><a class="source-link" href="https://www.mpia.de/news/science/2026-10-dun-aonghasa" target="_blank" rel="noopener">Research team’s release ↗</a></div>
+        </div>
+      </article>
+      <div class="side-stories">
+        <article class="story"><div class="thumb city" aria-hidden="true"></div><div><h3><a href="article.html">How scientists found a quasar among millions of observations</a></h3><p>The discovery emerged from data collected by Europe’s Euclid telescope.</p><div class="meta"><time>Euclid mission</time><span class="dot"></span>Space</div></div></article>
+        <article class="story"><div class="thumb bike" aria-hidden="true"></div><div><h3><a href="#latest">The black hole weighs 360 million Suns</a></h3><p>Its mass was measured with the Webb telescope.</p><div class="meta"><time>Webb data</time><span class="dot"></span>Astronomy</div></div></article>
+        <article class="story"><div class="thumb book" aria-hidden="true"></div><div><h3><a href="#latest">The quasar is named after an ancient Irish fort</a></h3><p>The team named the object Dún Aonghasa.</p><div class="meta"><time>Discovery details</time><span class="dot"></span>Science</div></div></article>
+      </div>
+    </section>
+    <section class="lower" id="latest">
+      <div>
+        <div class="section-label"><h2>What we know about the discovery</h2><span>The discovery at a glance</span></div>
+        <div class="latest-grid">
+          <article class="latest-card"><div class="mini-art"></div><h3><a href="https://apnews.com/article/7d60ddc27c43517b0968c8294262a6a5" target="_blank" rel="noopener">630 million years after the Big Bang</a></h3><p>The quasar, an active core of a distant galaxy, was already shining this early in the universe’s history.</p><div class="meta"><time>Key fact</time><span class="dot"></span>Space</div></article>
+          <article class="latest-card"><div class="mini-art food"></div><h3><a href="https://apnews.com/article/7d60ddc27c43517b0968c8294262a6a5" target="_blank" rel="noopener">Its light traveled for 13.1 billion years</a></h3><p>Astronomers see the quasar as it was in the early universe.</p><div class="meta"><time>Look-back time</time><span class="dot"></span>Astronomy</div></article>
+          <article class="latest-card"><div class="mini-art park"></div><h3><a href="https://apnews.com/article/7d60ddc27c43517b0968c8294262a6a5" target="_blank" rel="noopener">Results published in Astronomy &amp; Astrophysics</a></h3><p>Observations from Hubble, Webb, and other observatories helped confirm the discovery.</p><div class="meta"><time>Research paper</time><span class="dot"></span>Research</div></article>
+        </div>
+      </div>
+      <aside class="briefing" id="newsletter">
+        <h2>The Morning Brief</h2>
+        <p>The day’s essential stories, clearly and briefly. Read the editors’ curated news roundup.</p>
+        <button id="subscribeBtn" type="button">Subscribe to the newsletter</button>
+        <small id="subscribeNote">No spam. Just the essentials, a few times a week.</small>
+      </aside>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><strong>MY GAZETTE</strong><span>Independent news about what is happening around us.</span><span>© 2026 My Gazette</span></div></footer>
+  <script>
+    const button = document.getElementById('subscribeBtn');
+    button.addEventListener('click', () => {
+      button.textContent = 'Thanks for your interest!';
+      button.disabled = true;
+      document.getElementById('subscribeNote').textContent = 'A full version of the site will include a working subscription form here.';
+    });
+  </script>
+</body>
+</html>
+
